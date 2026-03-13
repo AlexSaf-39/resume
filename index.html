@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Александр Сафоненко · резюме-портфолио</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #fafafa;
+            color: #181818;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+        }
+
+        
+        .sidebar {
+            background-color: #ffffff;
+            border-radius: 28px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.02);
+            border: 1px solid #f0f0f0;
+            transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        .sidebar.stack-active {
+            padding-top: 1.5rem; 
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-block {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .sidebar-header h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+            margin: 0;
+        }
+
+        .sidebar-header i.chevron {
+            font-size: 0.8rem;
+            color: #ccc;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-block.active .sidebar-header i.chevron {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out, opacity 0.3s, padding 0.3s;
+            opacity: 0;
+        }
+
+        .sidebar-block.active .sidebar-content {
+            max-height: 1000px; 
+            opacity: 1;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: #e6e9ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: #1e3a8a;
+            font-size: 2.5rem;
+            border: 3px solid white;
+            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0; 
+        }
+
+        .sidebar.stack-active .avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            border-width: 2px;
+        }
+
+        .name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .sidebar.stack-active .name {
+            font-size: 1.25rem;
+        }
+
+        .title {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5e5e5e;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #ededed;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .sidebar.stack-active .title {
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: #2d2d2d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .info-item i {
+            width: 1.5rem;
+            color: #3b82f6;
+            font-size: 1.1rem;
+        }
+
+        .info-item:hover {
+            color: #3b82f6;
+        }
+
+        .skillset {
+            margin-top: 0;
+        }
+
+        .skillset h3 {
+            display: none;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-tag {
+            background: #f2f2f2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #2d2d2d;
+            transition: background 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #e4e4e4;
+        }
+
+        
+        .main-content {
+            min-width: 0; 
+        }
+
+        .main-header {
+            margin-bottom: 2rem;
+        }
+
+        .main-header h2 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-header p {
+            color: #5f5f5f;
+            max-width: 500px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.05);
+            border-color: #d9d9d9;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 150px;
+            background-color: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a8a;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-img-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .project-img-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 1; 
+            transition: opacity 0.2s, background 0.2s;
+            color: #333;
+            font-size: 0.7rem;
+        }
+
+        .project-card .slider-arrow {
+            opacity: 0;
+        }
+
+        .project-card:hover .slider-arrow {
+            opacity: 1;
+        }
+
+        .slider-arrow:hover {
+            background: #fff;
+        }
+
+        .arrow-prev { left: 8px; }
+        .arrow-next { right: 8px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            z-index: 2;
+        }
+
+        .slider-dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .slider-dot.active {
+            background: #fff;
+            width: 12px;
+            border-radius: 4px;
+        }
+
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: #fff;
+            width: 100%;
+            max-width: 1000px;
+            height: 600px; 
+            max-height: 90vh;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: #333;
+            font-size: 1.1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .modal-slider-section {
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .modal-img-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            flex-shrink: 0;
+            background: #000;
+        }
+
+        .modal-info-section {
+            padding: 3rem 2.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .modal-desc {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .modal-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                max-height: 95vh;
+            }
+            .modal-slider-section {
+                height: 350px;
+            }
+            .modal-info-section {
+                padding: 1.5rem;
+                max-height: 400px;
+            }
+            .modal-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .project-content {
+            padding: 1.4rem 1.2rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #4e4e4e;
+            margin-bottom: 1.2rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: auto;
+        }
+
+        .project-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #3b82f6;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .project-links a:hover {
+            color: #1d4ed8;
+            border-bottom-color: currentColor;
+        }
+
+        .project-links a i {
+            font-size: 0.85rem;
+        }
+
+        
+        .footer {
+            margin-top: 3.5rem;
+            text-align: center;
+            color: #8c8c8c;
+            font-size: 0.85rem;
+            border-top: 1px solid #ececec;
+            padding-top: 2rem;
+        }
+
+        
+        @media (min-width: 801px) {
+            .sidebar {
+                position: sticky;
+                top: 2rem;
+                height: calc(100vh - 4rem); 
+                overflow: hidden; 
+            }
+            
+            
+            .sidebar-scrollable-content {
+                flex: 1;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #f0f0f0 transparent;
+                padding-right: 0.25rem; 
+            }
+            .sidebar-scrollable-content::-webkit-scrollbar {
+                width: 4px;
+            }
+            .sidebar-scrollable-content::-webkit-scrollbar-thumb {
+                background-color: #f0f0f0;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .resume-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .sidebar {
+                padding: 1.5rem;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .name {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar-experience-stats {
+            margin-top: auto;
+            border-top: 1px dashed #eee;
+            padding-top: 0.75rem;
+            flex-shrink: 0; 
+            background: white; 
+            z-index: 2;
+        }
+        .text-small {
+            font-size: 0.85rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            border-bottom: 2px solid #3b82f6;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .experience-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 5px 15px -10px rgba(0,0,0,0.02);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .company-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .job-period {
+            font-size: 0.85rem;
+            color: #777;
+            background: #f0f4ff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+        }
+
+        .job-title {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-list li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            color: #4e4e4e;
+        }
+
+        .experience-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .about-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #f0f0f0;
+            line-height: 1.6;
+            color: #2d2d2d;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: #3b82f6;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="resume-grid">
+            
+            <aside class="sidebar">
+                
+                <div class="avatar">
+                    <img src="img/ava/ava.PNG" alt="Александр Сафоненко" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="name">Александр Сафоненко</div>
+                <div class="title">Python Developer · Backend / Automation</div>
+
+                
+                <div class="sidebar-scrollable-content">
+                    
+                    <div class="sidebar-block active" id="block-contacts">
+                        <div class="sidebar-header" onclick="toggleSidebarBlock('block-contacts')">
+                            <h3>контакты</h3>
+                            <i class="fas fa-chevron-down chevron"></i>
+                        </div>
+                        <div class="sidebar-content">
+                            <a href="mailto:hunoqwe@gmail.com" class="info-item"><i class="far fa-envelope"></i> hunoqwe@gmail.com</a>
+                            <a href="tel:+79914837839" class="info-item"><i class="fas fa-phone"></i> +7 (991) 483-78-39</a>
+                            <a href="https://github.com/viderq" target="_blank" class="info-item"><i class="fab fa-github"></i> github.com/viderq</a>
+                            <div class="info-item" style="margin-bottom: 0;"><i class="fas fa-map-pin"></i> Москва</div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="sidebar-block" id="block-stack">
+                        <div class="sidebar-header" onclick="toggleSidebarBlock('block-stack')">
+                            <h3>стек</h3>
+                            <i class="fas fa-chevron-down chevron"></i>
+                        </div>
+                        <div class="sidebar-content">
+                            <div class="skillset">
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python 3.9+</span>
+                                    <span class="skill-tag">Telegram Bot API</span>
+                                    <span class="skill-tag">REST API</span>
+                                    <span class="skill-tag">MySQL</span>
+                                    <span class="skill-tag">SQLite</span>
+                                    <span class="skill-tag">HTML / CSS / JS</span>
+                                    <span class="skill-tag">PWA / Capacitor</span>
+                                    <span class="skill-tag">Linux / Ubuntu</span>
+                                    <span class="skill-tag">Windows Server / AD</span>
+                                    <span class="skill-tag">Git</span>
+                                    <span class="skill-tag">Автоматизация</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="sidebar-experience-stats">
+                    <div style="display: flex; gap: 1.5rem;">
+                        <div><span style="font-weight: 600;">4+</span> <span class="text-small" style="color:#777;">года</span></div>
+                        <div><span style="font-weight: 600;">5</span> <span class="text-small" style="color:#777;">проектов</span></div>
+                    </div>
+                </div>
+            </aside>
+
+            
+            <main class="main-content">
+                <header class="main-header">
+                    <h2>Портфолио проектов</h2>
+                </header>
+
+                <div class="about-section">
+                    Python-разработчик с реальными проектами в авиационной отрасли. Создаю веб-приложения, PWA, Telegram-боты и мобильные приложения, которые уже используются коллегами из «Аэрофлота». Умею самостоятельно закрывать задачи от идеи до деплоя. Имею практический опыт администрирования Linux-серверов, сетей и баз данных.
+                </div>
+
+                <div class="projects-grid">
+                    
+                    <div class="project-card" onclick="openModal('aviaexam')">
+                        <div class="project-img">
+                            <div class="project-img-slider" id="slider-aviaexam">
+                                <img src="img/aviaexam/0.png" alt="AviaExam 0">
+                                <img src="img/aviaexam/1.png" alt="AviaExam 1">
+                                <img src="img/aviaexam/2.png" alt="AviaExam 2">
+                                <img src="img/aviaexam/3.png" alt="AviaExam 3">
+                                <img src="img/aviaexam/4.png" alt="AviaExam 4">
+                                <img src="img/aviaexam/5.png" alt="AviaExam 5">
+                            </div>
+                            <button class="slider-arrow arrow-prev" onclick="event.stopPropagation(); moveSlider('aviaexam', -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-next" onclick="event.stopPropagation(); moveSlider('aviaexam', 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="slider-dots" id="dots-aviaexam" onclick="event.stopPropagation()"></div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">PWA · Авиация</span>
+                            <h3 class="project-title">AviaExam</h3>
+                            <p class="project-desc">Платформа для подготовки к экзаменам Росавиации. Тренировочные тесты, прогресс пользователя, адаптивный интерфейс. Используется пилотами и бортпроводниками для аттестации.</p>
+                            <div class="project-links">
+                                <a href="https://aviaexam.ru" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> aviaexam.ru</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="project-card" onclick="openModal('sleep-calc')">
+                        <div class="project-img">
+                            <div class="project-img-slider" id="slider-sleep-calc">
+                                <img src="img/Sleep Calculator/0.jpg" alt="Sleep Calculator 0">
+                                <img src="img/Sleep Calculator/1.jpg" alt="Sleep Calculator 1">
+                                <img src="img/Sleep Calculator/2.jpg" alt="Sleep Calculator 2">
+                                <img src="img/Sleep Calculator/3.jpg" alt="Sleep Calculator 3">
+                            </div>
+                            <button class="slider-arrow arrow-prev" onclick="event.stopPropagation(); moveSlider('sleep-calc', -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-next" onclick="event.stopPropagation(); moveSlider('sleep-calc', 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="slider-dots" id="dots-sleep-calc" onclick="event.stopPropagation()"></div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">PWA · Авиация</span>
+                            <h3 class="project-title">Sleep Calculator</h3>
+                            <p class="project-desc">Инструмент для расчёта оптимального времени сна перед рейсами. Помогает авиационному персоналу планировать отдых с учётом расписания и часовых поясов.</p>
+                            <div class="project-links">
+                                <a href="https://viderq.github.io/time_managment/index.html" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> демо</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="project-card" onclick="openModal('informia')">
+                        <div class="project-img">
+                            <div class="project-img-slider" id="slider-informia">
+                                <img src="img/speech_trainer/0.png" alt="Информания 0">
+                                <img src="img/speech_trainer/1.png" alt="Информания 1">
+                                <img src="img/speech_trainer/2.png" alt="Информания 2">
+                                <img src="img/speech_trainer/3.png" alt="Информания 3">
+                            </div>
+                            <button class="slider-arrow arrow-prev" onclick="event.stopPropagation(); moveSlider('informia', -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-next" onclick="event.stopPropagation(); moveSlider('informia', 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="slider-dots" id="dots-informia" onclick="event.stopPropagation()"></div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">PWA · В разработке</span>
+                            <h3 class="project-title">Информания</h3>
+                            <p class="project-desc">Интерактивный тренажёр для бортпроводников: правила информирования пассажиров, практика объявлений на борту.</p>
+                            <div class="project-links">
+                                <a href="https://viderq.github.io/speech_trainer/index.html" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> демо</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="project-card" onclick="openModal('ctrainer')">
+                        <div class="project-img">
+                            <div class="project-img-slider" id="slider-ctrainer">
+                                <img src="img/ctrainer/0.png" alt="Cabin Crew Trainer 0">
+                                <img src="img/ctrainer/1.png" alt="Cabin Crew Trainer 1">
+                                <img src="img/ctrainer/2.png" alt="Cabin Crew Trainer 2">
+                                <img src="img/ctrainer/3.png" alt="Cabin Crew Trainer 3">
+                                <img src="img/ctrainer/4.png" alt="Cabin Crew Trainer 4">
+                            </div>
+                            <button class="slider-arrow arrow-prev" onclick="event.stopPropagation(); moveSlider('ctrainer', -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-next" onclick="event.stopPropagation(); moveSlider('ctrainer', 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="slider-dots" id="dots-ctrainer" onclick="event.stopPropagation()"></div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">PWA · Авиация</span>
+                            <h3 class="project-title">Cabin Crew Trainer</h3>
+                            <p class="project-desc">PWA-тренажёр для подготовки к обслуживанию пассажиров бизнес-класса. Симуляция рабочих сценариев на борту.</p>
+                            <div class="project-links">
+                                <a href="https://viderq.github.io/ctrainer/index.html" target="_blank" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i> демо</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="project-card" onclick="openModal('panic-button')">
+                        <div class="project-img">
+                            <div class="project-img-slider" id="slider-panic-button">
+                                <img src="img/panic_button/IMG_5411.jpg" alt="Тревожная кнопка 0">
+                                <img src="img/panic_button/IMG_5412.jpg" alt="Тревожная кнопка 1">
+                            </div>
+                            <button class="slider-arrow arrow-prev" onclick="event.stopPropagation(); moveSlider('panic-button', -1)"><i class="fas fa-chevron-left"></i></button>
+                            <button class="slider-arrow arrow-next" onclick="event.stopPropagation(); moveSlider('panic-button', 1)"><i class="fas fa-chevron-right"></i></button>
+                            <div class="slider-dots" id="dots-panic-button" onclick="event.stopPropagation()"></div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">iOS / Android · В разработке</span>
+                            <h3 class="project-title">Тревожная кнопка</h3>
+                            <p class="project-desc">Мобильное приложение для iOS и Android. Отправляет сигнал тревоги и геолокацию на пульт охранной системы. Интеграция с системой мониторинга Traccar.</p>
+                            <div class="project-links">
+                                <span style="font-size: 0.8rem; color: #777;">Capacitor · Traccar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Опыт работы</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company-name">ПАО «Аэрофлот»</span>
+                        <span class="job-period">апрель 2025 — по настоящее время</span>
+                    </div>
+                    <div class="job-title">Бортпроводник</div>
+                    <ul class="experience-list">
+                        <li>Работа в международной авиакомпании, взаимодействие с пассажирами</li>
+                        <li>Параллельно разрабатываю внутренние инструменты для коллег (AviaExam, тренажёры)</li>
+                        <li>Глубокое понимание авиационных процедур и потребностей отрасли</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company-name">ООО «Ускорение бизнеса»</span>
+                        <span class="job-period">сентябрь 2024 — январь 2025</span>
+                    </div>
+                    <div class="job-title">Программист 1С</div>
+                    <ul class="experience-list">
+                        <li>Поддержка пользователей, установка и настройка 1С</li>
+                        <li>Разработка и доработка конфигураций под нужды бизнеса</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company-name">ООО «Инок-Плюс»</span>
+                        <span class="job-period">февраль 2023 — август 2024</span>
+                    </div>
+                    <div class="job-title">Администратор сетей</div>
+                    <ul class="experience-list">
+                        <li>Администрирование сетевой инфраструктуры, настройка маршрутизаторов и коммутаторов</li>
+                        <li>Управление пользователями Active Directory, поддержка серверов Linux и Windows</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company-name">ООО «Патриот-КСБ»</span>
+                        <span class="job-period">август 2021 — декабрь 2022</span>
+                    </div>
+                    <div class="job-title">Инженер по ремонту ПК</div>
+                    <ul class="experience-list">
+                        <li>Обслуживание техники, настройка рабочих мест</li>
+                        <li>Администрирование Ubuntu-серверов</li>
+                        <li>Разработка Python-скриптов для автоматизации рабочих процессов</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">Образование</h2>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="company-name">Калининградский колледж управления</span>
+                        <span class="job-period">2021</span>
+                    </div>
+                    <div class="job-title">Техник информационных технологий по отраслям</div>
+                </div>
+
+                
+                <footer class="footer">
+                    <span>© <span id="current-year"></span> Александр Сафоненко</span>
+                    <span style="margin: 0 0.5rem;">·</span>
+                    <span>Python Developer</span>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <div id="project-modal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-slider-section" id="modal-swipe-area">
+                <div class="modal-img-container" id="modal-slider">
+                    
+                </div>
+                <button class="slider-arrow arrow-prev" id="modal-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow arrow-next" id="modal-next"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-dots" id="modal-dots"></div>
+            </div>
+            <div class="modal-info-section">
+                <span id="modal-tag" class="project-tag"></span>
+                <h2 id="modal-title" class="modal-title"></h2>
+                <div id="modal-desc" class="modal-desc"></div>
+                <div id="modal-links" class="project-links"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        const projectData = {
+            'aviaexam': {
+                title: 'AviaExam',
+                tag: 'PWA · Авиация',
+                desc: 'Платформа для подготовки к экзаменам Росавиации. Тренировочные тесты, прогресс пользователя, адаптивный интерфейс. Используется пилотами и бортпроводниками для аттестации.',
+                images: ['img/aviaexam/0.png', 'img/aviaexam/1.png', 'img/aviaexam/2.png', 'img/aviaexam/3.png', 'img/aviaexam/4.png', 'img/aviaexam/5.png'],
+                links: [{text: 'aviaexam.ru', url: 'https://aviaexam.ru'}]
+            },
+            'sleep-calc': {
+                title: 'Sleep Calculator',
+                tag: 'PWA · Авиация',
+                desc: 'Инструмент для расчёта оптимального времени сна перед рейсами. Помогает авиационному персоналу планировать отдых с учётом расписания и часовых поясов.',
+                images: ['img/Sleep Calculator/0.jpg', 'img/Sleep Calculator/1.jpg', 'img/Sleep Calculator/2.jpg', 'img/Sleep Calculator/3.jpg'],
+                links: [{text: 'демо', url: 'https://viderq.github.io/time_managment/index.html'}]
+            },
+            'informia': {
+                title: 'Информания',
+                tag: 'PWA · В разработке',
+                desc: 'Интерактивный тренажёр для бортпроводников: правила информирования пассажиров, практика объявлений на борту.',
+                images: ['img/speech_trainer/0.png', 'img/speech_trainer/1.png', 'img/speech_trainer/2.png', 'img/speech_trainer/3.png'],
+                links: [{text: 'демо', url: 'https://viderq.github.io/speech_trainer/index.html'}]
+            },
+            'ctrainer': {
+                title: 'Cabin Crew Trainer',
+                tag: 'PWA · Авиация',
+                desc: 'PWA-тренажёр для подготовки к обслуживанию пассажиров бизнес-класса. Симуляция рабочих сценариев на борту.',
+                images: ['img/ctrainer/0.png', 'img/ctrainer/1.png', 'img/ctrainer/2.png', 'img/ctrainer/3.png', 'img/ctrainer/4.png'],
+                links: [{text: 'демо', url: 'https://viderq.github.io/ctrainer/index.html'}]
+            },
+            'panic-button': {
+                title: 'Тревожная кнопка',
+                tag: 'iOS / Android · В разработке',
+                desc: 'Мобильное приложение для iOS и Android. Отправляет сигнал тревоги и геолокацию на пульт охранной системы. Интеграция с системой мониторинга Traccar.',
+                images: ['img/panic_button/IMG_5411.jpg', 'img/panic_button/IMG_5412.jpg'],
+                links: [{text: 'Capacitor · Traccar', url: null}]
+            }
+        };
+
+        let sliderStates = {};
+
+        function moveSlider(projectId, direction) {
+            const slider = document.getElementById(`slider-${projectId}`);
+            const images = slider.querySelectorAll('img');
+            const total = images.length;
+            
+            if (!sliderStates[projectId]) sliderStates[projectId] = 0;
+            
+            sliderStates[projectId] = (sliderStates[projectId] + direction + total) % total;
+            
+            slider.style.transform = `translateX(-${sliderStates[projectId] * 100}%)`;
+            updateDots(projectId);
+        }
+
+        function updateDots(projectId) {
+            const dotsContainer = document.getElementById(`dots-${projectId}`);
+            const total = document.getElementById(`slider-${projectId}`).querySelectorAll('img').length;
+            const current = sliderStates[projectId] || 0;
+            
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${i === current ? 'active' : ''}`;
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        let currentModalProject = null;
+        let currentModalImgIndex = 0;
+
+        function openModal(projectId) {
+            const data = projectData[projectId];
+            if (!data) return;
+
+            currentModalProject = projectId;
+            currentModalImgIndex = 0;
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-tag').textContent = data.tag;
+            document.getElementById('modal-desc').textContent = data.desc;
+            
+            
+            const slider = document.getElementById('modal-slider');
+            slider.innerHTML = '';
+            data.images.forEach((src, idx) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `${data.title} ${idx}`;
+                slider.appendChild(img);
+            });
+            slider.style.transform = 'translateX(0)';
+
+            const linksContainer = document.getElementById('modal-links');
+            linksContainer.innerHTML = '';
+            data.links.forEach(link => {
+                if (link.url) {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.target = '_blank';
+                    a.innerHTML = `<i class="fas fa-external-link-alt"></i> ${link.text}`;
+                    linksContainer.appendChild(a);
+                } else {
+                    const span = document.createElement('span');
+                    span.style.fontSize = '0.8rem';
+                    span.style.color = '#777';
+                    span.textContent = link.text;
+                    linksContainer.appendChild(span);
+                }
+            });
+
+            updateModalDots();
+            
+            const overlay = document.getElementById('project-modal');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            
+            const prevBtn = document.getElementById('modal-prev');
+            const nextBtn = document.getElementById('modal-next');
+            
+            if (data.images.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+                prevBtn.onclick = (e) => { e.stopPropagation(); moveModalSlider(-1); };
+                nextBtn.onclick = (e) => { e.stopPropagation(); moveModalSlider(1); };
+            }
+        }
+
+        function updateModalSlider() {
+            const slider = document.getElementById('modal-slider');
+            slider.style.transform = `translateX(-${currentModalImgIndex * 100}%)`;
+            updateModalDots();
+        }
+
+        function updateModalDots() {
+            const dotsContainer = document.getElementById('modal-dots');
+            const data = projectData[currentModalProject];
+            if (!data) return;
+            
+            dotsContainer.innerHTML = '';
+            if (data.images.length <= 1) return;
+
+            data.images.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${i === currentModalImgIndex ? 'active' : ''}`;
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function moveModalSlider(direction) {
+            const data = projectData[currentModalProject];
+            const total = data.images.length;
+            currentModalImgIndex = (currentModalImgIndex + direction + total) % total;
+            updateModalSlider();
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('project-modal');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        
+        function initSwipe(elementId, onSwipeLeft, onSwipeRight) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            el.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            el.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+
+            function handleSwipe() {
+                const threshold = 50;
+                if (touchendX < touchstartX - threshold) onSwipeLeft();
+                if (touchendX > touchstartX + threshold) onSwipeRight();
+            }
+
+            
+            let lastWheelTime = 0;
+            el.addEventListener('wheel', e => {
+                if (Math.abs(e.deltaX) > 30) {
+                    const now = Date.now();
+                    if (now - lastWheelTime > 300) { 
+                        if (e.deltaX > 0) onSwipeLeft();
+                        else onSwipeRight();
+                        lastWheelTime = now;
+                    }
+                    if (e.cancelable) e.preventDefault();
+                }
+            }, {passive: false});
+        }
+
+        function toggleSidebarBlock(blockId) {
+            const block = document.getElementById(blockId);
+            const sidebar = document.querySelector('.sidebar');
+            const isActive = block.classList.contains('active');
+            
+            
+            if (isActive) return;
+
+            
+            document.querySelectorAll('.sidebar-block').forEach(b => {
+                b.classList.remove('active');
+            });
+
+            
+            block.classList.add('active');
+
+            
+            if (blockId === 'block-stack') {
+                sidebar.classList.add('stack-active');
+            } else {
+                sidebar.classList.remove('stack-active');
+            }
+        }
+
+        (function() {
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            
+            const stubLinks = document.querySelectorAll('a[href="#"]');
+            stubLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('🚀 Реальный проект — ссылка ведёт на работающий ресурс.\nСейчас это демо-заглушка.');
+                });
+            });
+
+            
+            Object.keys(projectData).forEach(id => {
+                updateDots(id);
+                initSwipe(`slider-${id}`, () => moveSlider(id, 1), () => moveSlider(id, -1));
+            });
+
+            
+            initSwipe('modal-swipe-area', () => moveModalSlider(1), () => moveModalSlider(-1));
+
+            
+            console.log('👨‍🚀 Портфолио Александра Сафоненко — Python Developer.');
+        })();
+    </script>
+</body>
+</html>
